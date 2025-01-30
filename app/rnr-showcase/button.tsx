@@ -1,10 +1,10 @@
-import { View } from "react-native";
+import Themelayout from "~/components/theme-layout";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 
 const ButtonExample = () => {
   return (
-    <View className="bg-white dark:bg-black flex-1 p-4 gap-8">
+    <Themelayout className="gap-5">
       <Button variant="default">
         <Text>Default</Text>
       </Button>
@@ -23,7 +23,7 @@ const ButtonExample = () => {
       <Button variant="outline">
         <Text>Outline</Text>
       </Button>
-    </View>
+    </Themelayout>
   );
 };
 

@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import Themelayout from "~/components/theme-layout";
 import {
   Accordion,
   AccordionContent,
@@ -9,7 +9,7 @@ import { Text } from "~/components/ui/text";
 
 const AccordionExample = () => {
   return (
-    <View className="bg-white dark:bg-black flex-1 p-4">
+    <Themelayout>
       <Accordion
         type="multiple"
         collapsible
@@ -18,10 +18,10 @@ const AccordionExample = () => {
       >
         <AccordionItem value="item-1">
           <AccordionTrigger>
-            <Text className="text-black dark:text-white">Trigger</Text>
+            <Text>Trigger</Text>
           </AccordionTrigger>
           <AccordionContent>
-            <Text className="text-black dark:text-white">
+            <Text>
               This is the content of the accordion item. This only shows when
               the item is open.
             </Text>
@@ -29,19 +29,17 @@ const AccordionExample = () => {
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger>
-            <Text className="text-black dark:text-white">
-              What are universal components?
-            </Text>
+            <Text>What are universal components?</Text>
           </AccordionTrigger>
           <AccordionContent>
-            <Text className="text-black dark:text-white">
+            <Text>
               In the world of React Native, universal components are components
               that work on both web and native platforms.
             </Text>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </View>
+    </Themelayout>
   );
 };
 

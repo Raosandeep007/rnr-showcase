@@ -1,6 +1,8 @@
 import { Href, useRouter } from "expo-router";
-import { FlatList, Text, View } from "react-native";
+import { FlatList } from "react-native";
+import Themelayout from "~/components/theme-layout";
 import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
 import "../global.css";
 
 export default function Index() {
@@ -18,24 +20,42 @@ export default function Index() {
       name: "Button",
       href: "/rnr-showcase/button",
     },
+    {
+      name: "Alert",
+      href: "/rnr-showcase/alert",
+    },
+    {
+      name: "Alert dialog",
+      href: "/rnr-showcase/alert-dialog",
+    },
+    {
+      name: "Aspect ratio",
+      href: "/rnr-showcase/aspect-ratio",
+    },
+    {
+      name: "Typography",
+      href: "/rnr-showcase/typography",
+    },
+    {
+      name: "Avatar",
+      href: "/rnr-showcase/avatar",
+    },
   ];
 
   return (
-    <View className="bg-white dark:bg-black flex-1 p-4">
+    <Themelayout>
       <FlatList
         data={COMPONENTS}
         keyExtractor={(item) => item.name}
         contentContainerClassName="gap-2"
         renderItem={({ item }) => {
           return (
-            <Button variant="default" onPress={() => router.push(item.href)}>
-              <Text className="dark:text-black text-white text-lg font-medium">
-                {item.name}
-              </Text>
+            <Button variant="outline" onPress={() => router.push(item.href)}>
+              <Text className="text-lg font-medium">{item.name}</Text>
             </Button>
           );
         }}
       />
-    </View>
+    </Themelayout>
   );
 }
