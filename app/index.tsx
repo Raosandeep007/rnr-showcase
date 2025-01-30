@@ -1,5 +1,6 @@
 import { Href, useRouter } from "expo-router";
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
+import { Button } from "~/components/ui/button";
 import "../global.css";
 
 export default function Index() {
@@ -13,22 +14,25 @@ export default function Index() {
       name: "Accordion",
       href: "/rnr-showcase/accordion",
     },
+    {
+      name: "Button",
+      href: "/rnr-showcase/button",
+    },
   ];
 
   return (
-    <View className="bg-white dark:bg-black flex-1">
+    <View className="bg-white dark:bg-black flex-1 p-4">
       <FlatList
         data={COMPONENTS}
         keyExtractor={(item) => item.name}
+        contentContainerClassName="gap-2"
         renderItem={({ item }) => {
           return (
-            <Pressable
-              onPress={() => {
-                router.push(item.href);
-              }}
-            >
-              <Text className="text-black dark:text-white">{item.name}</Text>
-            </Pressable>
+            <Button variant="default" onPress={() => router.push(item.href)}>
+              <Text className="dark:text-black text-white text-lg font-medium">
+                {item.name}
+              </Text>
+            </Button>
           );
         }}
       />
