@@ -16,7 +16,7 @@ import { Text } from "~/components/ui/text";
 
 const AlertDialogExample = () => {
   return (
-    <Themelayout>
+    <Themelayout className="justify-center">
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant="outline">

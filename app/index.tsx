@@ -1,57 +1,56 @@
-import { Href, useRouter } from "expo-router";
-import { FlatList } from "react-native";
+import { useRouter } from "expo-router";
+import { ChevronRight } from "lucide-react-native";
+import { useState } from "react";
+import { View } from "react-native";
+import Animated, { LinearTransition } from "react-native-reanimated";
 import Themelayout from "~/components/theme-layout";
 import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import { Text } from "~/components/ui/text";
+import { COMPONENTS } from "~/data/components";
+import { useDebounce } from "~/hook/useDebounce";
 import "../global.css";
 
 export default function Index() {
   const router = useRouter();
+  const [search, setSearch] = useState("");
+  const handlesearch = (text: string) => {
+    setSearch(text);
+  };
 
-  const COMPONENTS: {
-    name: string;
-    href: Href;
-  }[] = [
-    {
-      name: "Accordion",
-      href: "/rnr-showcase/accordion",
-    },
-    {
-      name: "Button",
-      href: "/rnr-showcase/button",
-    },
-    {
-      name: "Alert",
-      href: "/rnr-showcase/alert",
-    },
-    {
-      name: "Alert dialog",
-      href: "/rnr-showcase/alert-dialog",
-    },
-    {
-      name: "Aspect ratio",
-      href: "/rnr-showcase/aspect-ratio",
-    },
-    {
-      name: "Typography",
-      href: "/rnr-showcase/typography",
-    },
-    {
-      name: "Avatar",
-      href: "/rnr-showcase/avatar",
-    },
-  ];
+  const searchTerm = useDebounce(search);
+
+  const components = searchTerm
+    ? COMPONENTS.filter(({ name, href }) => {
+        return (
+          name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          href.toString().toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      })
+    : COMPONENTS;
 
   return (
-    <Themelayout>
-      <FlatList
-        data={COMPONENTS}
+    <Themelayout className="gap-2">
+      <Input onChangeText={handlesearch} placeholder="Seacrh UI..." />
+      <Animated.FlatList
+        itemLayoutAnimation={LinearTransition}
+        showsVerticalScrollIndicator={false}
+        data={components}
         keyExtractor={(item) => item.name}
-        contentContainerClassName="gap-2"
         renderItem={({ item }) => {
           return (
-            <Button variant="outline" onPress={() => router.push(item.href)}>
-              <Text className="text-lg font-medium">{item.name}</Text>
+            <Button
+              variant="outline"
+              onPress={() => router.push(item.href)}
+              className="mx-3 my-2"
+            >
+              <View className="flex flex-row w-full">
+                <Text>{item.name}</Text>
+                <ChevronRight
+                  size={24}
+                  className="text-black dark:text-white ml-auto"
+                />
+              </View>
             </Button>
           );
         }}

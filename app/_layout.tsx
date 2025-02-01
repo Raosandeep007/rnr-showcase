@@ -5,12 +5,24 @@ import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "~/components/ui/button";
 import { H3, H4 } from "~/components/ui/typography";
-import { useColorScheme } from "~/lib/useColorScheme";
+import { useColorScheme } from "~/hook/useColorScheme";
 import "../global.css";
 
 export default function RootLayout() {
   const { top } = useSafeAreaInsets();
   const { colorScheme, toggleColorScheme } = useColorScheme();
+
+  function toOptions(name: string) {
+    const title = name
+      .split("rnr-showcase/")
+      .map(function (str: string) {
+        return str.replace(/\b\w/g, function (char) {
+          return char.toUpperCase();
+        });
+      })
+      .join(" ");
+    return title;
+  }
 
   return (
     <>
@@ -19,7 +31,7 @@ export default function RootLayout() {
           header: (props) => {
             return (
               <View
-                className="px-2 pb-2 bg-white dark:bg-black items-center flex-row justify-between w-full"
+                className="px-2 bg-white dark:bg-black items-center flex-row justify-between w-full"
                 style={{
                   paddingTop: top,
                 }}
@@ -34,12 +46,12 @@ export default function RootLayout() {
                     }}
                   >
                     <ChevronLeft
-                      size={20}
+                      size={28}
                       className="text-black dark:text-white"
                     />
                   </Button>
                 )}
-                <H4>{props.route.name}</H4>
+                <H4>{props.options.title || toOptions(props.route.name)}</H4>
                 <Button
                   hitSlop={20}
                   variant="ghost"
@@ -52,7 +64,14 @@ export default function RootLayout() {
             );
           },
         }}
-      />
+      >
+        <Stack.Screen
+          name="index"
+          options={{
+            title: "rnr showcase",
+          }}
+        />
+      </Stack>
       <PortalHost />
     </>
   );

@@ -9,7 +9,7 @@ import { Text } from "~/components/ui/text";
 
 const AccordionExample = () => {
   return (
-    <Themelayout>
+    <Themelayout className="items-center justify-center">
       <Accordion
         type="multiple"
         collapsible

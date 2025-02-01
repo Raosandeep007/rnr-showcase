@@ -6,7 +6,7 @@ const AVATAR_URI = "https://raosandeep.netlify.app/me_avatar.png";
 
 const AvatarExample = () => {
   return (
-    <Themelayout className="items-center">
+    <Themelayout className="items-center justify-center">
       <Avatar alt="Sandeep's Avatar">
         <AvatarImage source={{ uri: AVATAR_URI }} />
         <AvatarFallback>

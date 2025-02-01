@@ -4,7 +4,7 @@ import { Text } from "~/components/ui/text";
 
 const ButtonExample = () => {
   return (
-    <Themelayout className="gap-5">
+    <Themelayout className="gap-5 justify-center">
       <Button variant="default">
         <Text>Default</Text>
       </Button>
