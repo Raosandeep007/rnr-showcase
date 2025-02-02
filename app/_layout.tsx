@@ -7,6 +7,7 @@ import { Button } from "~/components/ui/button";
 import { H3, H4 } from "~/components/ui/typography";
 import { useColorScheme } from "~/hook/useColorScheme";
 import "../global.css";
+import ThemeSwitcher from "~/components/theme-switcher";
 
 export default function RootLayout() {
   const { top } = useSafeAreaInsets();
@@ -52,14 +53,7 @@ export default function RootLayout() {
                   </Button>
                 )}
                 <H4>{props.options.title || toOptions(props.route.name)}</H4>
-                <Button
-                  hitSlop={20}
-                  variant="ghost"
-                  size="icon"
-                  onPress={toggleColorScheme}
-                >
-                  <H3>{colorScheme === "dark" ? "🌞" : "🌚"}</H3>
-                </Button>
+                <ThemeSwitcher />
               </View>
             );
           },
